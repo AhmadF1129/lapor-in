@@ -27,7 +27,7 @@ class User extends CI_Model
         return $this->db->get_where($tabel, ['email' => $email])->row_array();
     }
 
-    public function tambah_admin($tabel, $id)
+    public function tambah_data_admin($tabel)
     {
         $nik = $this->input->post('nik');
         $nama = $this->input->post('nama');
@@ -55,7 +55,7 @@ class User extends CI_Model
                     'telp' => htmlspecialchars($telp),
                     'password' => password_hash($password, PASSWORD_DEFAULT),
                     'foto' => $foto_baru,
-                    'role_id' => $id,
+                    'role_id' => 1,
                     'is_active' => 1,
                     'dibuat_tgl' => date('Y-m-d'),
                 ];
@@ -64,13 +64,13 @@ class User extends CI_Model
         $this->db->insert($tabel, $data);
     }
 
-    public function tambah_petugas($tabel)
+    public function tambah_data_petugas($tabel)
     {
-        $nik = $this->input->post('nik-petugas');
-        $nama = $this->input->post('nama-petugas');
-        $email = $this->input->post('email-petugas');
-        $telp = $this->input->post('telp-petugas');
-        $password = $this->input->post('password-petugas');
+        $nik = $this->input->post('nik');
+        $nama = $this->input->post('nama');
+        $email = $this->input->post('email');
+        $telp = $this->input->post('telp');
+        $password = $this->input->post('password');
         $foto = $_FILES['foto']['name'];
 
         $data = [];

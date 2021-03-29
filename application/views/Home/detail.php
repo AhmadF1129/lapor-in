@@ -64,7 +64,8 @@
 
         <div class="col-lg-8 mx-auto mb-5 pb-5 col-12" data-aos="fade-up">
 
-            <?php if ($this->session->userdata('role_id') == 1 || 2) : ?>
+
+            <?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2) : ?>
                 <h3 class="my-3" data-aos="fade-up">Berikan Tanggapan</h3>
 
                 <form action="<?= base_url('HomeController/tambah_tanggapan/') . $post['id'] ?>" id="form-tanggapan" method="post" class="contact-form" data-aos="fade-up" data-aos-delay="300" role="form">

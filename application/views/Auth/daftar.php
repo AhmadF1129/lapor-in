@@ -43,7 +43,7 @@
                     required: true,
                     email: true,
                     remote: {
-                        url: 'cek_email',
+                        url: '<?= base_url('Authentication/cek_email') ?>',
                         type: 'post',
                         data: {
                             email: function() {

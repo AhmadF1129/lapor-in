@@ -69,6 +69,7 @@ https://templatemo.com/tm-538-digital-trend
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="' . base_url('HomeController') . '">Pengaduan</a></li>
                                     <li><a class="dropdown-item" href="' . base_url('HomeController/tabel_pengaduan') . '">Tabel Pengaduan</a></li>
+                                    <li><a class="dropdown-item" href="' . base_url('HomeController/tabel_laporan') . '">Tabel Laporan</a></li>
                                 </ul>
                             </li>
 
@@ -77,9 +78,9 @@ https://templatemo.com/tm-538-digital-trend
                                     User
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="' . base_url('HomeController/user/1') . '">Admin</a></li>
-                                    <li><a class="dropdown-item" href="' . base_url('HomeController/user/2') . '">Petugas</a></li>
-                                    <li><a class="dropdown-item" href="' . base_url('HomeController/user/3') . '">Masyarakat</a></li>
+                                    <li><a class="dropdown-item" href="' . base_url('HomeController/data_user/1') . '">Admin</a></li>
+                                    <li><a class="dropdown-item" href="' . base_url('HomeController/data_user/2') . '">Petugas</a></li>
+                                    <li><a class="dropdown-item" href="' . base_url('HomeController/data_user/3') . '">Masyarakat</a></li>
                                 </ul>
                             </li>
                         
@@ -105,6 +106,7 @@ https://templatemo.com/tm-538-digital-trend
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="' . base_url() . '">Pengaduan</a></li>
                                     <li><a class="dropdown-item" href="' . base_url('HomeController/tabel_pengaduan') . '">Tabel Pengaduan</a></li>
+                                    <li><a class="dropdown-item" href="' . base_url('HomeController/tabel_laporan') . '">Tabel Laporan</a></li>
                                 </ul>
                             </li>
                             
@@ -153,3 +155,9 @@ https://templatemo.com/tm-538-digital-trend
             </div>
         </div>
     </nav>
+    <!-- <nav class="nav flex-column">
+        <a class="nav-link active" aria-current="page" href="#">Active</a>
+        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    </nav> -->

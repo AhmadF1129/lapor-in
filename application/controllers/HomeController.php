@@ -7,9 +7,6 @@ class HomeController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Export');
-        $this->load->model('Pengaduan');
-        $this->load->model('User');
     }
 
     // LOAD VIEW
@@ -17,7 +14,18 @@ class HomeController extends CI_Controller
     {
         $nama = $this->session->userdata('nama');
 
-        $data['judul'] = 'Lapor-in | Beranda';
+        $data['judul'] = '';
+
+        if ($this->session->userdata('role_id') == null) {
+            $data['judul'] = 'Lapor-in';
+        } elseif ($this->session->userdata('role_id') == 1) {
+            $data['judul'] = 'Lapor-in | Admin';
+        } elseif ($this->session->userdata('role_id') == 2) {
+            $data['judul'] = 'Lapor-in | Petugas';
+        } else {
+            $data['judul'] = 'Lapor-in';
+        }
+
         $data['user'] = $this->db->get_where('user', ['nama' => $nama])->row_array();
 
         $this->load->view('Home/Template/header', $data);
@@ -25,25 +33,37 @@ class HomeController extends CI_Controller
         $this->load->view('Home/Template/footer');
     }
 
-    public function user($id)
+    public function data_user($id)
     {
         $nama = $this->session->userdata('nama');
-
         $data['judul'] = '';
+        $data['dataId'] = '';
         if ($id == 1) {
-            $data['judul'] = 'Lapor-in | Tabel Admin';
+            $data['judul'] = 'Lapor-in | Data Admin';
+            $data['dataId'] = 1;
         } elseif ($id == 2) {
-            $data['judul'] = 'Lapor-in | Tabel Petugas';
+            $data['judul'] = 'Lapor-in | Data Petugas';
+            $data['dataId'] = 2;
         } else {
-            $data['judul'] = 'Lapor-in | Tabel Masyarakat';
+            $data['judul'] = 'Lapor-in | Data Masyarakat';
+            $data['dataId'] = 3;
         }
 
-        $data['dataId'] = $id;
         $data['user'] = $this->db->get_where('user', ['nama' => $nama])->row_array();
 
-        $this->load->view('Home/Template/header', $data);
-        $this->load->view('Home/user');
-        $this->load->view('Home/Template/footer');
+        if ($id == 1) {
+            $this->load->view('Home/Template/header', $data);
+            $this->load->view('Home/User/admin');
+            $this->load->view('Home/Template/footer');
+        } elseif ($id == 2) {
+            $this->load->view('Home/Template/header', $data);
+            $this->load->view('Home/User/petugas');
+            $this->load->view('Home/Template/footer');
+        } else {
+            $this->load->view('Home/Template/header', $data);
+            $this->load->view('Home/User/masyarakat');
+            $this->load->view('Home/Template/footer');
+        }
     }
 
     public function tabel_pengaduan()
@@ -191,7 +211,7 @@ class HomeController extends CI_Controller
         echo $output;
     }
 
-    public function loadAdmin()
+    public function loadDataUser()
     {
         $query = '';
         $dataId = '';
@@ -218,68 +238,6 @@ class HomeController extends CI_Controller
 
         // DATA
         $data = $this->Pengaduan->loadAdmin($query, $dataId);
-
-        $i = 1;
-
-        if ($data->num_rows() > 0) {
-            foreach ($data->result() as $row) {
-                $output .= '<tbody>
-                                <tr>
-                                    <td>' . $i++ . '</td>
-                                    <td>' . $row->nik . '</td>
-                                    <td>' . $row->nama . '</td>
-                                    <td>' . $row->email . '</td>
-                                    <td>' . $row->telp . '</td>
-                                    <td>
-                                        <a href="' . base_url('HomeController/detail_user/') . $row->id . '" class="btn btn-primary fa fa-eye">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-warning fa fa-edit">
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>';
-            }
-        } else {
-            $output .= '<tbody>
-                            <tr>
-                                <td colspan="12">Data Tidak Ditemukan!!</td>
-                            </tr>
-                        </tbody>';
-        }
-        $output .= '
-                </table>
-                </div>';
-
-        echo $output;
-    }
-
-    public function loadPetugas()
-    {
-        $query = '';
-        $output = '';
-
-        if ($this->input->post('query')) {
-            $query = $this->input->post('query');
-        }
-
-        $output .= '
-            <div class="table-responsive">
-                <table class="table table-hover text-center">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>#</th>
-                            <th>NIK</th>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>No. Telp</th>
-                            <th colspan="2">ACTION</th>
-                        </tr>
-                    </thead>';
-
-        // DATA
-        $data = $this->Pengaduan->loadPetugas($query);
 
         $i = 1;
 
@@ -400,34 +358,6 @@ class HomeController extends CI_Controller
         echo $output;
     }
 
-    public function cek_nik()
-    {
-        $tabel = 'user';
-        $nik = $_POST['nik'];
-
-        $data = $this->Pengaduan->cekNIK($tabel, $nik);
-
-        if ($data) {
-            echo 'false';
-        } else {
-            echo 'true';
-        }
-    }
-
-    public function cek_email()
-    {
-        $tabel = 'user';
-        $email = $_POST['email'];
-
-        $data = $this->Pengaduan->cekEmail($tabel, $email);
-
-        if ($data) {
-            echo 'false';
-        } else {
-            echo 'true';
-        }
-    }
-
     public function getAllPost()
     {
         $data['post'] = $this->Pengaduan->getAllPost();
@@ -475,21 +405,21 @@ class HomeController extends CI_Controller
         $this->load->view('Home/Template/footer');
     }
 
-    public function tambah_data_user()
+    public function tambah_data_admin()
     {
-        $id = $this->input->post('role_id');
         $tabel = 'user';
-        $this->User->tambah_admin($tabel, $id);
-        $this->session->set_flashdata('flash', 'berhasil menambahkan admin!');
-        redirect('HomeController/user/' . $id);
+        $this->User->tambah_data_admin($tabel);
+
+        $this->session->set_flashdata('flash', 'Berhasil menambahkan data Admin!');
+        redirect('HomeController/data_user/1');
     }
 
-    public function tambah_petugas()
+    public function tambah_data_petugas()
     {
         $tabel = 'user';
-        $this->User->tambah_petugas($tabel);
-        $this->session->set_flashdata('flash', 'berhasil menambahkan petugas!');
-        redirect('HomeController/petugas');
+        $this->User->tambah_data_petugas($tabel);
+        $this->session->set_flashdata('flash', 'berhasil menambahkan data Petugas!');
+        redirect('HomeController/data_user/2');
     }
 
     public function tambah_tanggapan($id)

@@ -1,25 +1,19 @@
 <div id="flash-data" data-flashdata="<?= $this->session->flashdata('flash') ?>"></div>
 <!-- BLOG -->
-<section class="blog section-padding" data-role-id="<?= $dataId ?>">
+<section class="blog section-padding">
     <div class="container">
         <div class="card mb-4">
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <button class="btn btn-success" id="tambah-data" data-bs-toggle="modal" data-bs-target="#tambah-data-modal">
-                            <?php if ($dataId == 1) : ?>
-                                Tambahkan Admin
-                            <?php elseif ($dataId == 2) : ?>
-                                Tambahkan Petugas
-                            <?php else : ?>
-                                Tambahkan Masyarakat
-                            <?php endif; ?>
+                        <button class="btn btn-success" id="tambah-petugas" data-bs-toggle="modal" data-bs-target="#tambah-data-petugas">
+                            Tambah Petugas
                         </button>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Cari Data" id="cari-data">
-                            <button class="btn btn-success" type="button" id="cari-data">Cari</button>
+                            <input type="text" class="form-control" placeholder="Cari Data Petugas" id="cari-petugas">
+                            <button class="btn btn-success" type="button" id="cari-petugas">Cari</button>
                         </div>
                     </div>
                 </div>
@@ -28,23 +22,22 @@
 
         <div class="row">
             <div class="col-lg col-md col-12 mb-4">
-                <div id="data-admin"></div>
+                <div id="data-petugas"></div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Modal -->
-<div class="modal fade" id="tambah-data-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="tambah-data-petugas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambahkan Data</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambahkan Data Petugas</h5>
                 <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('HomeController/tambah_data_user') ?>" method="post" enctype="multipart/form-data" id="form-admin">
-                    <input type="hidden" name="role_id" id="role_id" value="<?= $dataId ?>">
+                <form action="<?= base_url('HomeController/tambah_data_petugas') ?>" method="post" enctype="multipart/form-data" id="form-petugas">
                     <div class="form-group mb-2">
                         <input type="text" name="nik" id="nik" class="form-control" placeholder="NIK">
                     </div>
@@ -78,22 +71,19 @@
 <script>
     $(document).ready(function() {
 
-        load_data_admin();
+        load_data_petugas();
 
-        function load_data_admin(query) {
+        function load_data_petugas(query) {
             $.ajax({
-                url: '<?= base_url('HomeController/loadAdmin') ?>',
+                url: '<?= base_url('HomeController/loadDataUser') ?>',
                 method: 'POST',
-                // dataType: 'JSON',
                 data: {
                     query: query,
-                    dataId: function() {
-                        return $('.blog').data('role-id');
-                    }
+                    dataId: 2,
                 },
                 success: function(result) {
                     // console.log(result);
-                    $('#data-admin').html(result);
+                    $('#data-petugas').html(result);
                 },
                 error: function(error) {
                     console.log(error);
@@ -102,29 +92,27 @@
         }
 
         // DATAGRID - SEARCH DATA
-        $('#cari-data').click(function() {
-            var search = $('#cari-data').val();
+        $('#cari-petugas').click(function() {
+            var search = $('#cari-petugas').val();
             if (search != '') {
-                load_data_admin(search);
+                load_data_petugas(search);
             } else {
-                load_data_admin();
+                load_data_petugas();
             }
         });
 
-        let value_nik = $('#nik').val();
-        let value_email = $('#email').val();
-
-        $('#form-admin').validate({
+        $('#form-petugas').validate({
             rules: {
                 'nik': {
                     required: true,
                     number: true,
                     remote: {
-                        url: 'cek_nik',
+                        url: '<?= base_url('HomeController/cek_nik') ?>',
                         type: 'post',
-                        dataType: 'JSON',
                         data: {
-                            nik: value_nik,
+                            nik: function() {
+                                return $('#nik').val();
+                            }
                         },
                     },
                 },
@@ -135,11 +123,12 @@
                     required: true,
                     email: true,
                     remote: {
-                        url: 'cek_email',
+                        url: '<?= base_url('HomeController/cek_email') ?>',
                         type: 'post',
-                        dataType: 'JSON',
                         data: {
-                            email: value_email,
+                            email: function() {
+                                return $('#email').val();
+                            }
                         }
                     },
                 },

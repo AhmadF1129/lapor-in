@@ -14,8 +14,6 @@ class ExportController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // Get TCPDF from Library
-        $this->load->library('myTCPDF');
     }
 
     public function exportPDF()

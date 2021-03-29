@@ -6,8 +6,6 @@ class Authentication extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('form_validation');
-        $this->load->model('User');
     }
 
     public function index()
@@ -69,6 +67,22 @@ class Authentication extends CI_Controller
             redirect('Authentication');
         }
     }
+
+    public function cek_nik()
+    {
+        $tabel = 'user';
+        $nik = $_POST['nik'];
+
+        $data = $this->Pengaduan->cekNIK($tabel, $nik);
+
+        if ($data) {
+            echo 'false';
+        } else {
+            echo 'true';
+        }
+        exit;
+    }
+
 
     public function cek_email()
     {
