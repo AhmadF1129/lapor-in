@@ -58,7 +58,7 @@
             <?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2) : ?>
                 <h3 class="my-3" data-aos="fade-up">Berikan Tanggapan</h3>
 
-                <form action="<?= base_url('HomeController/tambah_tanggapan/') . $post['id'] ?>" id="form-tanggapan" method="post" class="contact-form" data-aos="fade-up" data-aos-delay="300" role="form">
+                <form action="<?= base_url('TanggapanController/tambah_tanggapan/') . $post['id'] ?>" id="form-tanggapan" method="post" class="contact-form" data-aos="fade-up" data-aos-delay="300" role="form">
                     <div class="row">
                         <div class="col-lg-12 col-12">
                             <textarea class="form-control" rows="6" id="tanggapan" name="tanggapan" placeholder="Message"></textarea>

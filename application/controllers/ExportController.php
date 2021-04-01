@@ -21,8 +21,8 @@ class ExportController extends CI_Controller
         $pdf = new myTCPDF();
 
         // SET DOCUMENT INFORMATION
-        $pdf->SetCreator('AHMAD-FADILAH');
-        $pdf->SetAuthor('AHMAD-FADILAH');
+        $pdf->SetCreator('DINAS-PENDIDIKAN');
+        $pdf->SetAuthor('DINAS-PENDIDIKAN');
         $pdf->SetTitle('LAPORAN');
 
         // // HEADER - LOGO | TITLE => [NOT_USED] Set on myTCPDF Parent Construct

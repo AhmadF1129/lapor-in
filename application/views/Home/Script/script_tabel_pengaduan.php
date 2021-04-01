@@ -115,7 +115,7 @@
         $('#edit-pengaduan-modal').on('show.bs.modal', function(e) {
             const dataId = $(e.relatedTarget).data('id-pengaduan');
             $('#form-edit-pengaduan').removeAttr('action');
-            $('#form-edit-pengaduan').attr('action', '<?= base_url('PengaduanController/edit_pengaduan/') ?>' + dataId);
+            $('#form-edit-pengaduan').attr('action', '<?= base_url('PengaduanController/edit_status_pengaduan/') ?>' + dataId);
             // $.ajax({
             //     type: 'POST',
             //     url: '</?= base_url('HomeController/getAllPost') ?>',

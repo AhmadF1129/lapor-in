@@ -30,14 +30,14 @@ class Pengaduan extends CI_Model
 
     public function tambah_pengaduan()
     {
-        $judul = $this->input->post('judul-post');
-        $isi_pengaduan = $this->input->post('isi-post');
+        $judul = $this->input->post('judul');
+        $isi_pengaduan = $this->input->post('isi-pengaduan');
         $foto = $_FILES['foto']['name'];
 
         $data = [];
 
         if ($foto) {
-            $config['allowed_types'] = 'gif|jpg|png';
+            $config['allowed_types'] = 'gif|jpg|jpeg|png';
             $config['max_size'] = '4096';
             $config['upload_path'] = './assets/images/blog/';
 
@@ -53,16 +53,46 @@ class Pengaduan extends CI_Model
                     'bukti_foto' => $foto_baru,
                     'status' => 0,
                 ];
+            } else {
+                echo $this->upload->display_errors();
             }
         }
         $this->db->insert('pengaduan', $data);
     }
 
-    public function edit_pengaduan($id)
+    public function edit_status_pengaduan($id)
     {
         $data = [
             'status' => $this->input->post('cmb-status-pengaduan'),
         ];
+        $this->db->where('id', $id)->update('pengaduan', $data);
+    }
+
+    public function edit_pengaduan($id)
+    {
+        $judul = $this->input->post('judul');
+        $isi_pengaduan = $this->input->post('isi-pengaduan');
+        $foto = $_FILES['foto']['name'];
+        $data = [];
+
+        if ($foto) {
+            $config['allowed_types'] = 'gif|jpg|jpeg|png';
+            $config['max_size'] = '4096';
+            $config['upload_path'] = './assets/images/blog/';
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('foto')) {
+                $foto_baru = $this->upload->data('file_name');
+                $data = [
+                    'judul' => htmlspecialchars($judul),
+                    'isi_laporan' => htmlspecialchars($isi_pengaduan),
+                    'bukti_foto' => $foto_baru,
+                ];
+            } else {
+                echo $this->upload->display_errors();
+            }
+        }
         $this->db->where('id', $id)->update('pengaduan', $data);
     }
 

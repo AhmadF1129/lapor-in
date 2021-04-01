@@ -84,18 +84,18 @@ class HomeController extends CI_Controller
         }
     }
 
-    public function detail_user($id)
-    {
-        $nama = $this->session->userdata('nama');
+    // public function detail_user($id)
+    // {
+    //     $nama = $this->session->userdata('nama');
 
-        $data['judul'] = 'Lapor-in | Detail User';
-        $data['user'] = $this->db->get_where('user', ['nama' => $nama])->row_array();
-        $data['user_post'] = $this->db->get_where('user', ['id' => $id])->row_array();
+    //     $data['judul'] = 'Lapor-in | Detail User';
+    //     $data['user'] = $this->db->get_where('user', ['nama' => $nama])->row_array();
+    //     $data['user_post'] = $this->db->get_where('user', ['id' => $id])->row_array();
 
-        $this->load->view('Home/Template/header', $data);
-        $this->load->view('Home/profile');
-        $this->load->view('Home/Template/footer');
-    }
+    //     $this->load->view('Home/Template/header', $data);
+    //     $this->load->view('Home/profile');
+    //     $this->load->view('Home/Template/footer');
+    // }
 
     public function tabel_pengaduan()
     {
@@ -121,6 +121,53 @@ class HomeController extends CI_Controller
 
         $this->load->view('Home/Template/header', $data);
         $this->load->view('Home/detail');
+        $this->load->view('Home/Template/footer');
+    }
+
+    public function tambah_pengaduan()
+    {
+        $nama = $this->session->userdata('nama');
+
+        $data['judul'] = '';
+
+        if ($this->session->userdata('role_id') == null) {
+            $data['judul'] = 'Lapor-in';
+        } elseif ($this->session->userdata('role_id') == 1) {
+            $data['judul'] = 'Lapor-in | Admin';
+        } elseif ($this->session->userdata('role_id') == 2) {
+            $data['judul'] = 'Lapor-in | Petugas';
+        } else {
+            $data['judul'] = 'Lapor-in';
+        }
+
+        $data['user'] = $this->db->get_where('user', ['nama' => $nama])->row_array();
+
+        $this->load->view('Home/Template/header', $data);
+        $this->load->view('Home/tambah_pengaduan');
+        $this->load->view('Home/Template/footer');
+    }
+
+    public function edit_pengaduan($id)
+    {
+        $nama = $this->session->userdata('nama');
+
+        $data['judul'] = '';
+
+        if ($this->session->userdata('role_id') == null) {
+            $data['judul'] = 'Lapor-in';
+        } elseif ($this->session->userdata('role_id') == 1) {
+            $data['judul'] = 'Lapor-in | Admin';
+        } elseif ($this->session->userdata('role_id') == 2) {
+            $data['judul'] = 'Lapor-in | Petugas';
+        } else {
+            $data['judul'] = 'Lapor-in';
+        }
+
+        $data['user'] = $this->db->get_where('user', ['nama' => $nama])->row_array();
+        $data['pengaduan'] = $this->Pengaduan->data_pengaduan_order_by_id($id);
+
+        $this->load->view('Home/Template/header', $data);
+        $this->load->view('Home/edit_pengaduan');
         $this->load->view('Home/Template/footer');
     }
 }

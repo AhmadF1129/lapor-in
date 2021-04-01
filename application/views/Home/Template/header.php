@@ -104,7 +104,7 @@ https://templatemo.com/tm-538-digital-trend
                             </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="' . base_url() . '">Pengaduan</a></li>
-                                    <li><a class="dropdown-item" href="' . base_url('PengaduanController/tabel_pengaduan') . '">Tabel Pengaduan</a></li>
+                                    <li><a class="dropdown-item" href="' . base_url('HomeController/tabel_pengaduan') . '">Tabel Pengaduan</a></li>
                                 </ul>
                             </li>
                             

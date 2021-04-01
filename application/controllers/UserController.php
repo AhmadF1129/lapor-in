@@ -49,12 +49,8 @@ class UserController extends CI_Controller
                                     <td>' . $row->email . '</td>
                                     <td>' . $row->telp . '</td>
                                     <td>
-                                        <a href="' . base_url('HomeController/detail_user/') . $row->id . '" class="btn btn-primary fa fa-eye">
+                                        <a href="' . base_url('UserController/detail_user/') . $row->id . '" class="btn btn-primary fa fa-eye">
                                         </a>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-warning fa fa-edit">
-                                        </button>
                                     </td>
                                 </tr>
                             </tbody>';

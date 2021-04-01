@@ -33,7 +33,7 @@ class PengaduanController extends CI_Controller
                     $status = '<small class="text-success">Selesai</small>';
                 }
                 if ($this->session->userdata('id') == $row->user_id) {
-                    $edit = '<a class="badge badge-warning" style="margin-left: 10px;"><i class="fa fa-edit"></i></a>';
+                    $edit = '<a href="HomeController/edit_pengaduan/' . $row->id . '" class="badge badge-warning" style="margin-left: 10px;"><i class="fa fa-edit"></i></a>';
                 } else {
                     $edit = '';
                 }
@@ -71,11 +71,18 @@ class PengaduanController extends CI_Controller
         redirect('HomeController');
     }
 
+    public function edit_status_pengaduan($id)
+    {
+        $this->Pengaduan->edit_status_pengaduan($id);
+        $this->session->set_flashdata('flash', 'berhasil merubah status pengaduan!');
+        redirect('HomeController/tabel_pengaduan');
+    }
+
     public function edit_pengaduan($id)
     {
         $this->Pengaduan->edit_pengaduan($id);
-        $this->session->set_flashdata('flash', 'berhasil merubah status pengaduan!');
-        redirect('HomeController/tabel_pengaduan');
+        $this->session->set_flashdata('flash', 'berhasil merubah data pengaduan!');
+        redirect('HomeController');
     }
 
     public function load_data_tabel_pengaduan()

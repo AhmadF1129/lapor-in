@@ -55,6 +55,6 @@ class TanggapanController extends CI_Controller
     {
         $this->Tanggapan->tambah_tanggapan($id);
         $this->session->set_flashdata('flash', 'Tanggapan berhasil ditambahkan!');
-        redirect('PengaduanController/detail_pengaduan/' . $id);
+        redirect('HomeController/detail_pengaduan/' . $id);
     }
 }

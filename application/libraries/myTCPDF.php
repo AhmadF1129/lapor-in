@@ -17,20 +17,20 @@ class myTCPDF extends TCPDF
     public function Header()
     {
         // Get Image
-        $image_file = '<img src="' . K_PATH_IMAGES . 'smkn1subang.png' . '" height="75" width="auto">';
+        $image_file = '<img src="' . K_PATH_IMAGES . 'dispen.png' . '" height="75" width="auto">';
 
         // Set Header
         $setHeader = '
             <table>
                 <tr>
                     <td rowspan="3" width="15%">' . $image_file . '</td>
-                    <td width="85%"><h1>SMK NEGERI 1 SUBANG</h1></td>
+                    <td width="85%"><h1>DINAS PENDIDIKAN</h1></td>
                 </tr>
                 <tr>
                     <td style="font-size:15px" width="85%">LAPORAN</td>
                 </tr>
                 <tr>
-                    <td style="font-size:15px" width="85%">DATA PENGADUAN - SMKN 1 SUBANG</td>
+                    <td style="font-size:15px" width="85%">DATA PENGADUAN - DINAS PENDIDIKAN</td>
                 </tr>
             </table>
             <br>

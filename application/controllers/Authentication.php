@@ -19,7 +19,7 @@ class Authentication extends CI_Controller
         $this->_kirim_email($token, 'verify');
 
         $this->session->set_flashdata('flash', "berhasil membuat akun!\r\n harap segera aktivasi akun!");
-        redirect('Authentication');
+        redirect('HomeController/masuk');
     }
 
     private function _kirim_email($token, $type)
@@ -67,20 +67,20 @@ class Authentication extends CI_Controller
                     $this->db->update('user');
                     $this->db->delete('user_token', ['email' => $email]);
                     $this->session->set_flashdata('flash',  "Aktivasi " . $email . " berhasil! \r\n silahkan masuk untuk memulai sesi.");
-                    redirect('Authentication');
+                    redirect('HomeController/masuk');
                 } else {
                     $this->db->delete('user', ['email' => $email]);
                     $this->db->delete('user_token', ['email' => $email]);
                     $this->session->set_flashdata('flash',  "User Aktivasi gagal! masa aktif token habis! \r\n lakukan daftar ulang dan coba lagi!");
-                    redirect('Authentication');
+                    redirect('HomeController/masuk');
                 }
             } else {
                 $this->session->set_flashdata('flash',  'User Aktivasi gagal! Kesalahan sistem atau token tidak valid!');
-                redirect('Authentication');
+                redirect('HomeController/masuk');
             }
         } else {
             $this->session->set_flashdata('flash',  'User Aktivasi gagal! Kesalahan sistem atau email tidak valid!');
-            redirect('Authentication');
+            redirect('HomeController/masuk');
         }
     }
 
