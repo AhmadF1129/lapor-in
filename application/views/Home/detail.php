@@ -7,28 +7,24 @@
             <div class="col-lg-9 mx-auto col-md-10 col-12 mt-lg-5 text-center" data-aos="fade-up">
 
                 <?php if ($post['status'] == 0) : ?>
-                    <h3 class="text-center text-secondary">Baru</h3>
+                    <h3 class="text-center text-secondary mb-3">Baru</h3>
                 <?php elseif ($post['status'] == 1) : ?>
-                    <h3 class="text-center text-warning">Terverifikasi</h3>
+                    <h3 class="text-center text-warning mb-3">Terverifikasi</h3>
                 <?php elseif ($post['status'] == 2) : ?>
-                    <h3 class="text-center text-primary">Sedang Diproses</h3>
+                    <h3 class="text-center text-primary mb-3">Sedang Diproses</h3>
                 <?php else : ?>
-                    <h3 class="text-center text-success">Selesai Diproses</h3>
+                    <h3 class="text-center text-success mb-3">Selesai Diproses</h3>
                 <?php endif; ?>
 
 
-                <h1 id="data-id-pengaduan" data-idpengaduan="<?= $post['id'] ?>"><?= $post['judul'] ?></h1>
+                <h1 id="data-id-pengaduan" class="mb-3" data-id-pengaduan="<?= $post['id'] ?>"><?= $post['judul'] ?></h1>
 
                 <div class="client-info">
-                    <div class="d-flex justify-content-center align-items-center mt-3">
+                    <div class="d-flex justify-content-center align-items-center mb-3">
                         <img src="<?= base_url('assets/') ?>images/profile/<?= $post['foto'] ?>" class="img" style="border-radius: 100px;" alt="male avatar">
-                        <p><?= $post['nama'] ?></p>
+                        <a href="<?= base_url('UserController/detail_user/') . $post['user_id'] ?>"><?= $post['nama'] ?></a>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <h5 class="text-secondary"><?= $post['tgl_pengaduan'] ?></h5>
-                        </div>
-                    </div>
+                    <h5 class="text-secondary"><?= $post['tgl_pengaduan'] ?></h5>
                 </div>
             </div>
 
@@ -50,14 +46,8 @@
             <div class="col-lg-9 mx-auto col-md-11 col-12 my-5 pt-3" data-aos="fade-up">
 
                 <p class="lh-base"><?= $post['isi_laporan'] ?></p>
+                <hr>
 
-            </div>
-        </div>
-
-        <hr>
-
-        <div class="row">
-            <div class="col-lg mx-auto col-md col-12">
                 <div id="data-tanggapan"></div>
             </div>
         </div>
@@ -93,12 +83,12 @@
 
         function load_data_tanggapan() {
             $.ajax({
-                url: '<?= base_url('HomeController/loadTanggapan') ?>',
+                url: '<?= base_url('TanggapanController/load_data_tanggapan') ?>',
                 method: 'POST',
                 // dataType: 'JSON',
                 data: {
                     dataId: function() {
-                        return $('#data-id-pengaduan').data('idpengaduan');
+                        return $('#data-id-pengaduan').data('id-pengaduan');
                     },
                 },
                 success: function(result) {
@@ -122,7 +112,7 @@
                     required: 'field ini wajib diisi!',
                 }
             }
-        })
+        });
 
         const flashData = $('#flash-data').data('flashdata');
         if (flashData) {

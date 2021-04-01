@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Pengaduan extends CI_Model
 {
-    public function loadPengaduan($query)
+    public function load_data_pengaduan($query)
     {
         $this->db->select('p.*, u.nama, u.foto');
         $this->db->from('pengaduan p');
@@ -16,7 +16,7 @@ class Pengaduan extends CI_Model
         return $this->db->get();
     }
 
-    public function loadPengaduanOrderById()
+    public function load_data_pengaduan_order_by_user()
     {
         $id = $_POST['dataId'];
 
@@ -25,49 +25,6 @@ class Pengaduan extends CI_Model
         $this->db->join('user u', 'u.id = p.user_id');
         $this->db->where('p.user_id =' . $id);
         $this->db->order_by('p.id', 'DESC');
-        return $this->db->get();
-    }
-
-    public function loadTanggapan($id)
-    {
-        $this->db->select('t.*, p.*, u.nama, u.foto, u.role_id');
-        $this->db->from('tanggapan t');
-        $this->db->join('pengaduan p', 'p.id = t.pengaduan_id');
-        $this->db->join('user u', 'u.id = t.petugas_id');
-        $this->db->where('t.pengaduan_id =' . $id);
-        $this->db->order_by('t.id', 'ASC');
-        return $this->db->get();
-    }
-
-    public function loadAdmin($query, $dataId)
-    {
-        $this->db->select('u.*, r.role');
-        $this->db->from('user u');
-        $this->db->join('role r', 'r.id = u.role_id');
-        $this->db->where('u.role_id = ' . $dataId);
-        if ($query != '') {
-            $this->db->like('u.nik', $query);
-            $this->db->or_like('u.nama', $query);
-            $this->db->or_like('u.email', $query);
-            $this->db->or_like('u.telp', $query);
-        }
-        $this->db->order_by('u.id', 'DESC');
-        return $this->db->get();
-    }
-
-    public function loadPetugas($query)
-    {
-        $this->db->select('u.*, r.role');
-        $this->db->from('user u');
-        $this->db->join('role r', 'r.id = u.role_id');
-        $this->db->where('u.role_id = 2');
-        if ($query != '') {
-            $this->db->like('u.nik', $query);
-            $this->db->or_like('u.nama', $query);
-            $this->db->or_like('u.email', $query);
-            $this->db->or_like('u.telp', $query);
-        }
-        $this->db->order_by('u.id', 'DESC');
         return $this->db->get();
     }
 
@@ -109,42 +66,14 @@ class Pengaduan extends CI_Model
         $this->db->where('id', $id)->update('pengaduan', $data);
     }
 
-    public function tambah_tanggapan($id)
+    public function data_pengaduan_order_by_id($id)
     {
-        $data = [
-            'pengaduan_id' => $id,
-            'tgl_tanggapan' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 7),
-            'isi_tanggapan' => $this->input->post('tanggapan'),
-            'petugas_id' => $this->session->userdata('id'),
-        ];
-        $this->db->insert('tanggapan', $data);
-    }
-
-    public function getPostRow($id)
-    {
-        $query = "SELECT p.*, u.`nama`,u.`foto` FROM pengaduan p JOIN user u ON u.`id` = p.`user_id` WHERE p.`id` = " . $id;
-        return $this->db->query($query)->row_array();
-    }
-
-    public function getAllPostOrderById($id)
-    {
-        $query = "SELECT p.*, u.* FROM pengaduan p JOIN user u ON u.`id` = p.`user_id` WHERE p.`user_id` = " . $id;
-        return $this->db->query($query)->result_array();
-    }
-
-    public function cekNIK($tabel, $nik)
-    {
-        return $this->db->get_where($tabel, ['nik' => $nik])->row_array();
-    }
-
-    public function cekEmail($tabel, $email)
-    {
-        return $this->db->get_where($tabel, ['email' => $email])->row_array();
-    }
-
-    public function getAllPost()
-    {
-        $id = $_POST['dataId'];
-        return $this->db->get_where('pengaduan', ['id' => $id])->row_array();
+        $this->db->select('p.*, u.nama, u.foto');
+        $this->db->from('pengaduan p');
+        $this->db->join('user u', 'u.id = p.user_id');
+        $this->db->where('p.id', $id);
+        return $this->db->get()->row_array();
+        // $query = "SELECT p.*, u.`nama`,u.`foto` FROM pengaduan p JOIN user u ON u.`id` = p.`user_id` WHERE p.`id` = " . $id;
+        // return $this->db->query($query)->row_array();
     }
 }

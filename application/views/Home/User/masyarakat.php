@@ -32,7 +32,7 @@
 
         function load_data_masyarakat(query) {
             $.ajax({
-                url: '<?= base_url('HomeController/loadDataUser') ?>',
+                url: '<?= base_url('UserController/load_data_user') ?>',
                 method: 'POST',
                 data: {
                     query: query,

@@ -15,7 +15,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Cari Pengaduan" id="cari-data-pengaduan">
-                            <button class="btn btn-success" type="button" id="cari-pengaduan">Cari</button>
+                            <button class="btn btn-info" type="button" id="cari-pengaduan">Cari</button>
                         </div>
                     </div>
                 </div>

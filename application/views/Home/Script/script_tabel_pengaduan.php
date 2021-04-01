@@ -5,7 +5,7 @@
 
         function load_data_pengaduan(query) {
             $.ajax({
-                url: 'loadTabelPengaduan',
+                url: '<?= base_url('PengaduanController/load_data_tabel_pengaduan') ?>',
                 method: 'POST',
                 // dataType: 'JSON',
                 data: {
@@ -64,7 +64,7 @@
             // EXECUTE
             $.ajax({ // AJAX 1 => GET DATA
                 type: 'POST',
-                url: '<?= base_url('HomeController/getExportData') ?>', // cPengaduan
+                url: '<?= base_url('PengaduanController/get_export_data') ?>', // PengaduanController
                 dataType: 'JSON',
                 async: false,
                 data: { // REQUEST_1
@@ -75,7 +75,7 @@
                 success: function(res1) { // RESPONSE_1
                     // console.log(res1);
 
-                    let pathURL = format == 'pdf' ? '<?= base_url('ExportController/exportPDF'); ?>' : '<?= base_url('ExportController/exportXLS'); ?>'
+                    let pathURL = format == 'pdf' ? '<?= base_url('ExportController/export_pdf'); ?>' : '<?= base_url('ExportController/export_xls'); ?>'
 
                     $.ajax({ // AJAX 2 => CREATE REPORT
                         type: 'POST',
@@ -113,20 +113,22 @@
         }
 
         $('#edit-pengaduan-modal').on('show.bs.modal', function(e) {
-            const dataId = $(e.relatedTarget).data('idpengaduan');
-            $.ajax({
-                type: 'POST',
-                url: '<?= base_url('HomeController/getAllPost') ?>',
-                dataType: 'JSON',
-                data: {
-                    dataId: dataId,
-                },
-                success: function(result) {
-                    // console.log(result)
-                    $('#form-edit-pengaduan').removeAttr('action');
-                    $('#form-edit-pengaduan').attr('action', '<?= base_url('HomeController/edit_pengaduan/') ?>' + result.post.id);
-                }
-            });
+            const dataId = $(e.relatedTarget).data('id-pengaduan');
+            $('#form-edit-pengaduan').removeAttr('action');
+            $('#form-edit-pengaduan').attr('action', '<?= base_url('PengaduanController/edit_pengaduan/') ?>' + dataId);
+            // $.ajax({
+            //     type: 'POST',
+            //     url: '</?= base_url('HomeController/getAllPost') ?>',
+            //     dataType: 'JSON',
+            //     data: {
+            //         dataId: dataId,
+            //     },
+            //     success: function(result) {
+            //         // console.log(result)
+            //         $('#form-edit-pengaduan').removeAttr('action');
+            // $('#form-edit-pengaduan').attr('action', '</?= base_url('HomeController/edit_pengaduan/') ?>' + result.post.id);
+            //     }
+            // });
         })
 
     })

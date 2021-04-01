@@ -1,20 +1,16 @@
 <div id="flash-data" data-flashdata="<?= $this->session->flashdata('flash') ?>"></div>
 <!-- BLOG -->
-<section class="blog section-padding">
+<section class="blog">
     <div class="container">
-
-        <div class="row">
-            <div class="col-lg-7 col-md-7 col-12 mb-4">
-                <div id="data-pengaduan"></div>
-            </div>
-            <div class="col-lg-5 col-md-5 col-12">
-                <div class="card">
+        <div class="row section-padding justify-content-center">
+            <div class="col-lg-8 col-md-8 col-12 mb-4">
+                <div class="card mb-4">
                     <div class="card-body">
                         <form>
                             <div class="input-group mb-4">
                                 <label for="cari-data-pengaduan" style="font-size: 16px; margin-bottom: 10px;">Cari Pengaduan</label>
                                 <input type="text" class="form-control" id="cari-data-pengaduan">
-                                <button class="btn btn-success" type="button" id="cari-pengaduan">Cari</button>
+                                <button class="btn btn-info" type="button" id="cari-pengaduan">Cari</button>
                             </div>
                             <?php if ($this->session->userdata('role_id') == 3) : ?>
                                 <div class="input-group">
@@ -25,7 +21,7 @@
                         </form>
                     </div>
                 </div>
-
+                <div id="data-pengaduan"></div>
             </div>
         </div>
     </div>
@@ -40,7 +36,7 @@
                 <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('HomeController/tambah_pengaduan') ?>" method="post" enctype="multipart/form-data" id="form-post">
+                <form action="<?= base_url('PengaduanController/tambah_pengaduan') ?>" method="post" enctype="multipart/form-data" id="form-post">
                     <div class="form-group mb-2">
                         <input type="text" name="judul-post" id="judul-post" class="form-control" placeholder="Judul Pengaduan">
                     </div>
@@ -76,7 +72,7 @@
 
         function load_data_pengaduan(query) {
             $.ajax({
-                url: '<?= base_url('HomeController/loadPengaduan') ?>',
+                url: '<?= base_url('PengaduanController/load_data_pengaduan') ?>',
                 method: 'POST',
                 // dataType: 'JSON',
                 data: {

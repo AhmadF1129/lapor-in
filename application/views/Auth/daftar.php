@@ -3,8 +3,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-5 mr-auto col-md-6 col-12 newsletter-form">
-                <h4 data-aos="fade-up" data-aos-delay="200">Lapor-in | Daftar</h4>
-                <h2 data-aos="fade-up" data-aos-delay="300">Daftar akun baru.</h2>
+                <h4 data-aos="fade-up" data-aos-delay="200">Daftar akun baru.</h4>
+                <h2 data-aos="fade-up" data-aos-delay="300"><a href="<?= base_url() ?>">Lapor-in</a> | Daftar</h2>
                 <form action="<?= base_url('Authentication/tambah_user') ?>" id="form-daftar" method="post" enctype="multipart/form-data">
                     <div class="form-group mt-1" data-aos="fade-up" data-aos-delay="400">
                         <input name="d-nama" type="text" class="form-control" id="d-nama" placeholder="Nama Lengkap" value="<?= set_value('d-nama') ?>">
@@ -21,7 +21,7 @@
                     <button type="submit" class="btn w-100 mt-1" data-aos="fade-up" data-aos-delay="900">Daftar</button>
                 </form>
 
-                <small class="form-text mt-1" data-aos="fade-up" data-aos-delay="900"><a href="<?= base_url('Authentication') ?>">Saya sudah memiliki akun!</a></small>
+                <small class="form-text mt-1" data-aos="fade-up" data-aos-delay="900"><a href="<?= base_url('HomeController/masuk') ?>">Saya sudah memiliki akun!</a></small>
 
             </div>
             <div class="col-lg-5w ml-auto col-md-6 col-12">

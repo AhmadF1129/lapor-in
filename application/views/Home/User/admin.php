@@ -37,7 +37,7 @@
                 <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('HomeController/tambah_data_admin') ?>" method="post" enctype="multipart/form-data" id="form-admin">
+                <form action="<?= base_url('UserController/tambah_data_admin') ?>" method="post" enctype="multipart/form-data" id="form-admin">
                     <div class="form-group mb-2">
                         <input type="text" name="nik" id="nik" class="form-control" placeholder="NIK">
                     </div>
@@ -75,7 +75,7 @@
 
         function load_data_admin(query) {
             $.ajax({
-                url: '<?= base_url('HomeController/loadDataUser') ?>',
+                url: '<?= base_url('UserController/load_data_user') ?>',
                 method: 'POST',
                 data: {
                     query: query,

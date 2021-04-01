@@ -62,14 +62,14 @@ https://templatemo.com/tm-538-digital-trend
                 <ul class="navbar-nav ml-auto">
                     <?php if ($this->session->userdata('nama')) {
                         if ($this->session->userdata('role_id') == 1) {
-                            echo '<li class="nav-item dropdown">
+                            echo '
+                            <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Beranda
                             </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="' . base_url('HomeController') . '">Pengaduan</a></li>
                                     <li><a class="dropdown-item" href="' . base_url('HomeController/tabel_pengaduan') . '">Tabel Pengaduan</a></li>
-                                    <li><a class="dropdown-item" href="' . base_url('HomeController/tabel_laporan') . '">Tabel Laporan</a></li>
                                 </ul>
                             </li>
 
@@ -90,7 +90,6 @@ https://templatemo.com/tm-538-digital-trend
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="' . base_url('HomeController/detail_user/') . $user['id'] . '">Profile</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -105,8 +104,7 @@ https://templatemo.com/tm-538-digital-trend
                             </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="' . base_url() . '">Pengaduan</a></li>
-                                    <li><a class="dropdown-item" href="' . base_url('HomeController/tabel_pengaduan') . '">Tabel Pengaduan</a></li>
-                                    <li><a class="dropdown-item" href="' . base_url('HomeController/tabel_laporan') . '">Tabel Laporan</a></li>
+                                    <li><a class="dropdown-item" href="' . base_url('PengaduanController/tabel_pengaduan') . '">Tabel Pengaduan</a></li>
                                 </ul>
                             </li>
                             
@@ -116,7 +114,6 @@ https://templatemo.com/tm-538-digital-trend
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="' . base_url('HomeController/detail_user/') . $user['id'] . '">Profile</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -134,7 +131,6 @@ https://templatemo.com/tm-538-digital-trend
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="' . base_url('HomeController/detail_user/') . $user['id'] . '">Profile</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -144,11 +140,11 @@ https://templatemo.com/tm-538-digital-trend
                         }
                     } else {
                         echo '<li class="nav-item">
-                            <a href="#" class="nav-link">Beranda</a>
+                            <a href="' . base_url() . '" class="nav-link">Beranda</a>
                         </li>
                         
                         <li class="nav-item">
-                            <a id="direct-login" href="' . base_url('Authentication') . '" class="nav-link contact">Masuk</a>
+                            <a id="direct-login" href="' . base_url('HomeController/masuk') . '" class="nav-link contact">Masuk</a>
                         </li>';
                     } ?>
                 </ul>

@@ -3,11 +3,11 @@
 <section class="blog section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-12 mb-4">
+            <div class="col-lg-4 col-md-4 col-12 mb-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
                         <div class="client-info">
-                            <img src="<?= base_url('assets/images/profile/') . $user_post['foto'] ?>" class="img mb-3" style="border-radius: 100%;" alt="profiles">
+                            <img src="<?= base_url('assets/images/profile/') . $user_post['foto'] ?>" class="card-img rounded-circle mb-3" alt="profiles">
                             <h5 class="card-title" id="data-id-user" data-iduser="<?= $user_post['id'] ?>"><?= $user_post['nama'] ?></h5>
                             <p class="card-text"><?= $user_post['email'] ?></p>
                             <p class="card-text"><small class="text-muted">Dibuat pada <?= $user_post['dibuat_tgl'] ?></small></p>
@@ -16,17 +16,11 @@
                 </div>
                 <?php if ($user_post['id'] == $this->session->userdata('id')) : ?>
                     <div class="text-center">
-                        <a href="" class="btn btn-warning fa fa-edit"></a>
-                        <a href="" class="btn btn-primary fa fa-eye"></a>
-                        <a href="" class="btn btn-danger fa fa-trash"></a>
-                    </div>
-                <?php else : ?>
-                    <div class="text-center">
-                        <a href="" class="btn btn-primary fa fa-eye"></a>
+                        <a href="#" class="btn btn-warning fa fa-edit"></a>
                     </div>
                 <?php endif; ?>
             </div>
-            <div class="col-lg-9 col-md-9 col-12 mb-4">
+            <div class="col-lg-8 col-md-8 col-12 mb-4">
                 <div id="data-pengaduan-order-by-id"></div>
             </div>
         </div>
@@ -40,7 +34,7 @@
 
         function load_data_pengaduan_order_by_id() {
             $.ajax({
-                url: '<?= base_url('HomeController/loadPengaduanOrderById') ?>',
+                url: '<?= base_url('PengaduanController/load_data_pengaduan_order_by_user') ?>',
                 method: 'POST',
                 // dataType: 'JSON',
                 data: {

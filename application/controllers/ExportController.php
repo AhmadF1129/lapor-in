@@ -16,7 +16,7 @@ class ExportController extends CI_Controller
         parent::__construct();
     }
 
-    public function exportPDF()
+    public function export_pdf()
     {
         $pdf = new myTCPDF();
 
@@ -108,7 +108,7 @@ class ExportController extends CI_Controller
         ));
     }
 
-    public function exportXLS()
+    public function export_xls()
     {
         $spreadsheet = new Spreadsheet();
 
